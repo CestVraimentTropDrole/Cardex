@@ -5,5 +5,6 @@
     {% block body %}
         Vue d'une carte de Cardex <br/>
 
-        {{ card.name }}
+        {{ card.name }} <br/>
+        {{ card.number|format() }} <!--Faire en sorte que le format du numéro de carte soit adapté à l'extension automatiquement -> 001/100 p.e-->
     {% endblock %}

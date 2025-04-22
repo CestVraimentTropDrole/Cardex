@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Extension;
+use App\Repository\ExtensionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,9 +13,17 @@ class ExtensionController extends AbstractController
 {
 
     #[Route('/{extension}', name: 'extension.show', requirements: ['extension' => '[a-z0-9-]+'])]
-    public function show (Request $request): Response
+    public function show (Request $request, ExtensionRepository $extensionRepository): Response
     {
-        $extension = $request->attributes->get('extension');
+        $id = $request->attributes->get('extension');
+
+        $extension = $extensionRepository->findOneBy([
+            'id' => $id,
+        ]);
+
+        if (!$extension) {
+            throw $this->createNotFoundException('Ln\'extension demandée n\'existe pas.');
+        }
 
         return $this->render('extension/extension.html.twig', [
             'extension' => $extension,
