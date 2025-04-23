@@ -3,5 +3,14 @@
     {% block title %}Cardex - Accueil{% endblock %}
 
     {% block body %}
-        Index de Cardex
+        Index de Cardex <br /><br />
+
+        Liste des extensions :
+        <ul>
+            {% for extension in extensions %}
+                <li>
+                    {{ extension.code }} - {{ extension.name }}
+                </li>
+            {% endfor %}
+        </ul>
     {% endblock %}
