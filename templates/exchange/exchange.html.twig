@@ -1,0 +1,18 @@
+    {% extends 'base.html.twig' %}
+
+    {% block title %}Cardex - Échange{% endblock %}
+
+    {% block body %}
+        Vue des échanges de Cardex <br/><br />
+
+        Liste des échanges :
+
+        <ul>
+            {% for exchange in exchanges %}
+                <li><a href="{{ path('exchange.show', {'exchange': exchange.id}) }}">
+                    {{ exchange.CardGiven.name }} VS {{ exchange.CardRecieved.name }} - {{ exchange.date|date("d/m/Y") }}
+                </a></li>
+            {% endfor %}
+        </ul>
+
+    {% endblock %}

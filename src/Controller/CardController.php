@@ -28,13 +28,12 @@ class CardController extends AbstractController
 
         $quantity = $this->quantity($card->getQuantity());  // Récupère la quantité de la carte pour recevoir un message formatté
 
-        $extension_entity = $card->getExtension();
-        $extension_code = $extension_entity->getCode();
+        $extension = $card->getExtension();
 
         return $this->render('card/card.html.twig', [
             'card' => $card,
             'quantity' => $quantity,
-            'extension' => $extension_code,
+            'extension' => $extension,
         ]);
     }
     

@@ -1,0 +1,12 @@
+    {% extends 'base.html.twig' %}
+
+    {% block title %}Cardex - Échange{% endblock %}
+
+    {% block body %}
+        Vue d'un échange de Cardex <br/><br />
+
+        Carte donnée : {{ exchange.CardGiven.name }}  <br />
+        Carte reçue : {{ exchange.CardRecieved.name }} <br />
+        Échange effectué le : {{ exchange.date|date("j/m/Y, H:i") }}
+
+    {% endblock %}

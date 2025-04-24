@@ -3,18 +3,15 @@
 namespace App\Service;
 
 use App\Repository\CardRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 class CardStatsService
 {
 
     private $cardRepository;
-    private $entityManager;
 
-    public function __construct(CardRepository $cardRepository, EntityManagerInterface $entityManager)
+    public function __construct(CardRepository $cardRepository)
     {
         $this->cardRepository = $cardRepository;
-        $this->entityManager = $entityManager;
     }
 
     public function getCompletionStat(int $extensionId): int

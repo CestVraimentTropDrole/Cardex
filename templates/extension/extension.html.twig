@@ -5,4 +5,15 @@
     {% block body %}
         Vue d'une extension de Cardex <br/>
         {{ extension.code }} - {{ extension.name }} {{ stat }}%
+
+        <br /><br />
+        Cartes manquantes : <br />
+
+        <ul>
+            {% for card in missingCards %}
+                <li><a href="{{ path('card.show', {'extension': extension.id, 'number': card.number}) }}">
+                    {{ card.name }} - {{ card.number }}
+                </a></li>
+            {% endfor %}
+        </ul>
     {% endblock %}

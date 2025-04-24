@@ -7,10 +7,19 @@
 
         Liste des extensions :
         <ul>
-            {% for stat in stats %}
-                <li><a href="{{ path('extension.show', {'extension': stat.id}) }}">
-                    {{ stat.code }} - {{ stat.name }} : {{ stat.completion }}%
+            {% for extension in extensions %}
+                <li><a href="{{ path('extension.show', {'extension': extension.id}) }}">
+                    {{ extension.code }} - {{ extension.name }} : {{ extension.completion }}%
                 </a></li> 
+            {% endfor %}
+        </ul> <br />
+
+        Liste des cartes manquantes :
+        <ul>
+            {% for card in cards %}
+                <li><a href="{{ path('card.show', {'extension': card.extension.id, 'number': card.number}) }}">
+                    {{ card.name }} <br /> {{ card.extension.code }} - {{ card.number }} - {{ card.rarity }}
+                </a></li>
             {% endfor %}
         </ul>
     {% endblock %}

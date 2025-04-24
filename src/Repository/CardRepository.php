@@ -45,6 +45,35 @@ class CardRepository extends ServiceEntityRepository
             ;
         }
 
+        /**
+         * @return Card[] Return an array of Cards
+         */
+        public function findMissingCards(int $extensionId): array
+        {
+            return $this->createQueryBuilder('c')
+                ->where('c.extension = :extensionId')
+                ->andWhere('c.quantity < 1')
+                ->setParameter('extensionId', $extensionId)
+                ->orderBy('c.number', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
+        /**
+         * @return Card[] Return an array of Cards
+         */
+        public function findAllMissingCards(): array
+        {
+            return $this->createQueryBuilder('c')
+                ->where('c.quantity < 1')
+                ->orderBy('c.extension', 'ASC')
+                ->addOrderBy('c.number', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
     //    /**
     //     * @return Card[] Returns an array of Card objects
     //     */
