@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ExchangeRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ExchangeRepository::class)]
@@ -20,6 +21,9 @@ class Exchange
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Card $card_recieved = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date = null;
 
     public function getId(): ?int
     {
@@ -46,6 +50,18 @@ class Exchange
     public function setCardRecieved(?Card $card_recieved): static
     {
         $this->card_recieved = $card_recieved;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

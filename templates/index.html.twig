@@ -7,10 +7,10 @@
 
         Liste des extensions :
         <ul>
-            {% for extension in extensions %}
-                <li>
-                    {{ extension.code }} - {{ extension.name }}
-                </li>
+            {% for stat in stats %}
+                <li><a href="{{ path('extension.show', {'extension': stat.id}) }}">
+                    {{ stat.code }} - {{ stat.name }} : {{ stat.completion }}%
+                </a></li> 
             {% endfor %}
         </ul>
     {% endblock %}

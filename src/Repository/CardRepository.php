@@ -16,6 +16,35 @@ class CardRepository extends ServiceEntityRepository
         parent::__construct($registry, Card::class);
     }
 
+        /**
+         * @return int Returns an number of Cards
+         */
+        public function countByExtension(int $extensionId): int
+        {
+            return $this->createQueryBuilder('c')
+                ->select('COUNT(c.id)')
+                ->where('c.extension = :extensionId')
+                ->setParameter('extensionId', $extensionId)
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+        }
+
+        /**
+         * @return int Returns an number of Cards
+         */
+        public function countPossesedByExtension(int $extensionId): int
+        {
+            return $this->createQueryBuilder('c')
+                ->select('COUNT(c.id)')
+                ->where('c.extension = :extensionId')
+                ->andWhere('c.quantity >= 1')
+                ->setParameter('extensionId', $extensionId)
+                ->getQuery()
+                ->getSingleScalarResult()
+            ;
+        }
+
     //    /**
     //     * @return Card[] Returns an array of Card objects
     //     */
